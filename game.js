@@ -4,7 +4,14 @@
  * @returns {boolean} Returns `true` if player wins.
  */
 const simulateGame = (playerSwitches, doorCount = 3) => {
+    if (doorCount < 3) {
+        throw new Error("Door count cannot be less than 3.");
+    }
+
     const chooseRandom = (except = []) => {
+        if (except.length >= doorCount) {
+            throw new Error("Except array length cannot be equal to or exceed the door count.");
+        }
         const random = Math.floor(Math.random() * doorCount);
         return except.includes(random) ? chooseRandom(except) : random;
     }
